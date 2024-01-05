@@ -1,6 +1,6 @@
 package dev.melis.engelsizgonuller.config;
 
-import dev.melis.engelsizgonuller.core.user.UserPasswordEncoder;
+import dev.melis.engelsizgonuller.services.user.UserPasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
