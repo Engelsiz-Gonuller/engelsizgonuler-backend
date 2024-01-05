@@ -1,9 +1,11 @@
-package dev.melis.engelsizgonuller.core.registration;
+package dev.melis.engelsizgonuller.services.registration;
 
-import dev.melis.engelsizgonuller.core.dto.UserType;
+import dev.melis.engelsizgonuller.services.model.UserType;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import org.hibernate.validator.constraints.Length;
+
+import java.time.LocalDate;
 
 @Getter
 public class RegistrationServiceRequest {
@@ -16,6 +18,7 @@ public class RegistrationServiceRequest {
     private String name;
     private String surname;
     private UserType userType;
+    private LocalDate dateOfRegistration;
 
     public RegistrationServiceRequest setEmail(String email){
         this.email=email;
@@ -35,6 +38,10 @@ public class RegistrationServiceRequest {
     }
     public RegistrationServiceRequest setUserType(UserType userType){
         this.userType=userType;
+        return this;
+    }
+    public RegistrationServiceRequest setDateOfRegistration(LocalDate dateOfRegistration){
+        this.dateOfRegistration=dateOfRegistration;
         return this;
     }
 
