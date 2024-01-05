@@ -1,4 +1,4 @@
-package dev.melis.engelsizgonuller.core.user;
+package dev.melis.engelsizgonuller.services.user;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
