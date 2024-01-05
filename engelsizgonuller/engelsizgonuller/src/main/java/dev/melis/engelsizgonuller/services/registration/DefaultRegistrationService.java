@@ -1,17 +1,19 @@
-package dev.melis.engelsizgonuller.core.registration;
+package dev.melis.engelsizgonuller.services.registration;
 
 import dev.melis.engelsizgonuller.business.result.CreationResult;
 import dev.melis.engelsizgonuller.business.result.OperationFailureReason;
-import dev.melis.engelsizgonuller.core.dto.User;
-import dev.melis.engelsizgonuller.core.user.UserPasswordEncoder;
+import dev.melis.engelsizgonuller.services.model.User;
+import dev.melis.engelsizgonuller.services.model.UserType;
+import dev.melis.engelsizgonuller.services.user.UserPasswordEncoder;
 import dev.melis.engelsizgonuller.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 
 @Service
-public class DefaultRegistrationService implements RegistrationService{
+public class DefaultRegistrationService implements RegistrationService {
 
     private final UserRepository userRepository;
     private final UserPasswordEncoder passwordEncoder;
@@ -33,7 +35,11 @@ public class DefaultRegistrationService implements RegistrationService{
         user.setUserSurname(request.getSurname());
         user.setUserEmail(request.getEmail());
         user.setUserPassword(hashPassword);
-        user.setUserType(request.getUserType());
+        if(request.getUserType()== UserType.VOLUNTEER){
+            user.setUserType(UserType.VOLUNTEER);
+        }
+        user.setUserType(UserType.DISABLED_INDIVIDUAL);
+        user.setDateOfRegistration(LocalDate.now());
         userRepository.save(user);
         return CreationResult.success();
     }
