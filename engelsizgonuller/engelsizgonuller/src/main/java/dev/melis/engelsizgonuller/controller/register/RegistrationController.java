@@ -1,17 +1,17 @@
-package dev.melis.engelsizgonuller.app.register;
+package dev.melis.engelsizgonuller.controller.register;
 
 import dev.melis.engelsizgonuller.business.resulthandler.BusinessResultHandler;
-import dev.melis.engelsizgonuller.core.registration.RegistrationService;
+import dev.melis.engelsizgonuller.services.registration.RegistrationService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@Validated
 public class RegistrationController {
 
     private final RegistrationService registrationService;
@@ -21,7 +21,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/auth/register")
-    ResponseEntity<?> register(@RequestBody RegistrationRequest registrationRequest){
+    ResponseEntity<?> register(@RequestBody @Valid RegistrationRequest registrationRequest){
        var result=registrationService.register(registrationRequest.toServiceRequest());
        if(!result.isSuccess()){
            return BusinessResultHandler.handleFailureReason(result.getReason(),result.getMessage());
