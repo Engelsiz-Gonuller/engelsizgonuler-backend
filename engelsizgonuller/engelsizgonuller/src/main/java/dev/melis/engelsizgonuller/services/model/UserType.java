@@ -1,4 +1,4 @@
-package dev.melis.engelsizgonuller.core.dto;
+package dev.melis.engelsizgonuller.services.model;
 
 public enum UserType {
     VOLUNTEER,
