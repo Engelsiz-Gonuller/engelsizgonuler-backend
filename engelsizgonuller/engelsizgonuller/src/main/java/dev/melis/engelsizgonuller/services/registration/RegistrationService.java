@@ -1,4 +1,4 @@
-package dev.melis.engelsizgonuller.core.registration;
+package dev.melis.engelsizgonuller.services.registration;
 
 import dev.melis.engelsizgonuller.business.result.CreationResult;
 import jakarta.validation.Valid;
