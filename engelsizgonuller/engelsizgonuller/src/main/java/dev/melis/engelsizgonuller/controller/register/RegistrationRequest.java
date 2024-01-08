@@ -1,6 +1,6 @@
 package dev.melis.engelsizgonuller.controller.register;
 
-import dev.melis.engelsizgonuller.services.model.UserType;
+import dev.melis.engelsizgonuller.services.model.user.UserType;
 import dev.melis.engelsizgonuller.services.registration.RegistrationServiceRequest;
 
 import java.time.LocalDate;
@@ -10,8 +10,8 @@ public record RegistrationRequest(
         String surname,
         String password,
         String email,
-        UserType userType,
-        LocalDate dateOfRegistration
+        UserType userType
+
 ) {
     RegistrationServiceRequest toServiceRequest(){
         return new RegistrationServiceRequest()
@@ -19,7 +19,6 @@ public record RegistrationRequest(
                 .setName(name)
                 .setSurname(surname)
                 .setPassword(password)
-                .setUserType(userType)
-                .setDateOfRegistration(dateOfRegistration);
+                .setUserType(userType);
     }
 }
