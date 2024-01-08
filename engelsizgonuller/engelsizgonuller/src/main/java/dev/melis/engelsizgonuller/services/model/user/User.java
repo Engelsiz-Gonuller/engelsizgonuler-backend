@@ -1,7 +1,8 @@
-package dev.melis.engelsizgonuller.services.model;
+package dev.melis.engelsizgonuller.services.model.user;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,6 +27,9 @@ public class User implements UserDetails {
 
     @Column(name = "surname",nullable = false)
     private String userSurname;
+
+    @Column(name = "age")
+    private LocalDate birthday;
 
     @Column(name = "age")
     private int userAge;
@@ -58,11 +62,9 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired;
     private boolean accountNonExpired;
 
-
     public User(){
      this.id =0L;
     }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(role.name()));
