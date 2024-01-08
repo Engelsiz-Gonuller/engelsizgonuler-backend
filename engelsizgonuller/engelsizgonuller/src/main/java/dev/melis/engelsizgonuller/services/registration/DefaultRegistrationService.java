@@ -2,8 +2,8 @@ package dev.melis.engelsizgonuller.services.registration;
 
 import dev.melis.engelsizgonuller.business.result.CreationResult;
 import dev.melis.engelsizgonuller.business.result.OperationFailureReason;
-import dev.melis.engelsizgonuller.services.model.User;
-import dev.melis.engelsizgonuller.services.model.UserType;
+import dev.melis.engelsizgonuller.services.model.user.User;
+import dev.melis.engelsizgonuller.services.model.user.UserType;
 import dev.melis.engelsizgonuller.services.user.UserPasswordEncoder;
 import dev.melis.engelsizgonuller.repository.UserRepository;
 import org.springframework.stereotype.Service;
