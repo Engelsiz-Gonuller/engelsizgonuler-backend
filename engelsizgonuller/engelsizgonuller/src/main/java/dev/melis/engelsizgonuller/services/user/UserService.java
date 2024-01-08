@@ -1,6 +1,6 @@
 package dev.melis.engelsizgonuller.services.user;
 
-import dev.melis.engelsizgonuller.services.model.User;
+import dev.melis.engelsizgonuller.services.model.user.User;
 import dev.melis.engelsizgonuller.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
