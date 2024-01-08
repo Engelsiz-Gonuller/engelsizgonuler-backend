@@ -1,8 +1,8 @@
 package dev.melis.engelsizgonuller.business.jwt;
 
 import dev.melis.engelsizgonuller.services.jwt.JwtService;
-import dev.melis.engelsizgonuller.services.model.User;
-import dev.melis.engelsizgonuller.services.model.UserRole;
+import dev.melis.engelsizgonuller.services.model.user.User;
+import dev.melis.engelsizgonuller.services.model.user.UserRole;
 import dev.melis.engelsizgonuller.services.user.UserService;
 import dev.melis.engelsizgonuller.repository.UserRepository;
 import jakarta.servlet.FilterChain;
