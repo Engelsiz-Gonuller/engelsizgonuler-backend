@@ -4,9 +4,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public interface UserPasswordEncoder {
 
-    String encodePassword(String password);
+    String encode(String password);
 
     PasswordEncoder getEncoder();
 
-    boolean matces(String password, String passwordHash);
+    boolean matches(String password, String passwordHash);
 }
