@@ -1,4 +1,4 @@
-package dev.melis.engelsizgonuller.business.result;
+package dev.melis.engelsizgonuller.support.result;
 
 public class UpdateResult {
 
@@ -41,6 +41,9 @@ public class UpdateResult {
         return new UpdateResult()
                 .setResult(OperationResult.SUCCESS);
     }
+    public boolean isSuccess(){
+        return result.equals(OperationResult.SUCCESS);
+    }
 
     public static UpdateResult success(String message) {
         return new UpdateResult()
@@ -50,12 +53,14 @@ public class UpdateResult {
 
     public static UpdateResult failure(OperationFailureReason reason){
         return new UpdateResult()
+                .setResult(OperationResult.FAILED)
                 .setReason(reason);
 
     }
     public static UpdateResult failure(OperationFailureReason reason,String message){
         return new UpdateResult()
                 .setReason(reason)
+                .setResult(OperationResult.FAILED)
                 .setMessage(message);
 
     }
