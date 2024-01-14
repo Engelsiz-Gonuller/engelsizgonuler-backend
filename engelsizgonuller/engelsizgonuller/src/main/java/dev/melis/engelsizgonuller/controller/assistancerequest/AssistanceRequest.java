@@ -11,17 +11,19 @@ public record AssistanceRequest(
          long userId,
          RequestType requestType,
          long categoryId,
+         String requestHeader,
          String requestContent,
          LocalDate requestDeadline,
          boolean isFulFilled
 ) {
     AssistanceRequestServiceRequest toServiceRequest(){
         User user=new User();
-        user.setId(userId);
+        user.setUserId(userId);
         Category category=new Category();
         category.setCategoryId(categoryId);
         return new AssistanceRequestServiceRequest()
                 .setRequestType(requestType)
+                .setRequestHeader(requestHeader)
                 .setRequestContent(requestContent)
                 .setRequestDeadline(requestDeadline)
                 .setCategory(category)
