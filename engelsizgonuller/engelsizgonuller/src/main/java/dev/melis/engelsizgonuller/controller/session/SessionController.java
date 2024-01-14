@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/info")
+@RequestMapping("/me")
 public class SessionController {
 
     private final UserRepository userRepository;
@@ -19,6 +19,6 @@ public class SessionController {
     }
     @GetMapping
     ResponseEntity<?> getSession(UserSession userSession){
-        return new ResponseEntity<>(new SessionDeatils(userSession.id(), userSession.username(), userSession.role()), HttpStatus.OK);
+        return new ResponseEntity<>(new SessionDetails(userSession.id(), userSession.username(), userSession.role()), HttpStatus.OK);
     }
 }
