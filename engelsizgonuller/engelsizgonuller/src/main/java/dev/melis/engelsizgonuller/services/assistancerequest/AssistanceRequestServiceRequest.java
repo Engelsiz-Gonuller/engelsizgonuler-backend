@@ -14,6 +14,7 @@ public class AssistanceRequestServiceRequest {
     private User user;
     private RequestType requestType;
     private Category category;
+    private String requestHeader;
     private String requestContent;
     private LocalDate requestDate;
     private LocalDate requestDeadline;
@@ -35,6 +36,10 @@ public class AssistanceRequestServiceRequest {
         this.requestContent=requestContent;
         return this;
     }
+    public AssistanceRequestServiceRequest setRequestHeader(String requestHeader){
+        this.requestHeader=requestHeader;
+        return this;
+    }
     public AssistanceRequestServiceRequest setRequestDate(LocalDate requestDate){
         this.requestDate=requestDate;
         return this;
@@ -47,11 +52,5 @@ public class AssistanceRequestServiceRequest {
         this.isFulFilled=false;
         return this;
     }
-
-
-
-
-
-
 
 }
