@@ -1,7 +1,8 @@
 package dev.melis.engelsizgonuller.services.registration;
 
-import dev.melis.engelsizgonuller.business.result.CreationResult;
-import dev.melis.engelsizgonuller.business.result.OperationFailureReason;
+import dev.melis.engelsizgonuller.services.model.user.UserRole;
+import dev.melis.engelsizgonuller.support.result.CreationResult;
+import dev.melis.engelsizgonuller.support.result.OperationFailureReason;
 import dev.melis.engelsizgonuller.services.model.user.User;
 import dev.melis.engelsizgonuller.services.model.user.UserType;
 import dev.melis.engelsizgonuller.services.user.UserPasswordEncoder;
@@ -29,9 +30,9 @@ public class DefaultRegistrationService implements RegistrationService {
         if(userOptional.isPresent()){
             return CreationResult.failure(OperationFailureReason.CONFLICT,"User has already registered");
         }
-        String hashPassword=passwordEncoder.encodePassword(request.getPassword());
+        String hashPassword=passwordEncoder.encode(request.getPassword());
         var user= new User();
-        user.setUserName(request.getName());
+        user.setName(request.getName());
         user.setUserSurname(request.getSurname());
         user.setUserEmail(request.getEmail());
         user.setUserPassword(hashPassword);
@@ -40,6 +41,7 @@ public class DefaultRegistrationService implements RegistrationService {
         }
         user.setUserType(UserType.DISABLED_INDIVIDUAL);
         user.setDateOfRegistration(LocalDate.now());
+        user.setRole(UserRole.USER);
         userRepository.save(user);
         return CreationResult.success();
     }
