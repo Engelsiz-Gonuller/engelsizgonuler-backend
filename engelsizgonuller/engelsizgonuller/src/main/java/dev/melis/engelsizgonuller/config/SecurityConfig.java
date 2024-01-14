@@ -1,6 +1,6 @@
 package dev.melis.engelsizgonuller.config;
 
-import dev.melis.engelsizgonuller.business.jwt.JwtAuthenticationFilter;
+import dev.melis.engelsizgonuller.support.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -30,7 +30,6 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( authorizeHttp -> authorizeHttp
                                 .requestMatchers("/auth/login","/auth/register").permitAll()
-                                .requestMatchers("/assistance-request/**").permitAll()
                                 .anyRequest()
                                 .authenticated()
                            )
