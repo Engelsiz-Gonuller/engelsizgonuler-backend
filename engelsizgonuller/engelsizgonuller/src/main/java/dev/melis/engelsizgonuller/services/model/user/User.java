@@ -2,7 +2,6 @@ package dev.melis.engelsizgonuller.services.model.user;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,25 +13,23 @@ import java.util.Collections;
 
 @Entity
 @Table(name = "user")
-@Getter
 @Setter
+@Getter
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userid",nullable = false)
-    long id;
+    @Getter
+    long userId;
 
     @Column(name = "name",nullable = false)
-    private  String userName;
+    private  String name;
 
     @Column(name = "surname",nullable = false)
     private String userSurname;
 
-    @Column(name = "age")
+    @Column(name = "birthday")
     private LocalDate birthday;
-
-    @Column(name = "age")
-    private int userAge;
 
     @Column(name = "job")
     private String userJob;
@@ -55,6 +52,7 @@ public class User implements UserDetails {
     private LocalDate dateOfRegistration;
 
     @Column(name = "role")
+    @Getter
     private UserRole role;
 
     private boolean isLocked;
@@ -63,7 +61,7 @@ public class User implements UserDetails {
     private boolean accountNonExpired;
 
     public User(){
-     this.id =0L;
+     this.userId =0L;
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
