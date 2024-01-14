@@ -1,7 +1,6 @@
-package dev.melis.engelsizgonuller.business;
+package dev.melis.engelsizgonuller.support;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public class ResponseMessage {
