@@ -1,7 +1,7 @@
 package dev.melis.engelsizgonuller.services.authentication;
 
-import dev.melis.engelsizgonuller.business.result.AuthenticationResult;
-import dev.melis.engelsizgonuller.business.result.OperationFailureReason;
+import dev.melis.engelsizgonuller.support.result.AuthenticationResult;
+import dev.melis.engelsizgonuller.support.result.OperationFailureReason;
 import dev.melis.engelsizgonuller.services.jwt.JwtService;
 import dev.melis.engelsizgonuller.services.model.user.User;
 import dev.melis.engelsizgonuller.services.user.UserPasswordEncoder;
@@ -29,7 +29,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
             return AuthenticationResult.failed(OperationFailureReason.NOT_FOUND,"User not found");
         }
        User user=userOptional.get();
-        if(!userPasswordEncoder.matces(request.getPassword(), user.getPassword())){
+        if(!userPasswordEncoder.matches(request.getPassword(), user.getPassword())){
             return AuthenticationResult.failed(OperationFailureReason.UNAUTHORIZED,"Wrong credential");
         }
 
