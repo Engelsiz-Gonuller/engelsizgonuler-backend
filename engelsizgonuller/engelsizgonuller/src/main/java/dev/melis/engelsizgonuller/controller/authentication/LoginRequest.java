@@ -11,7 +11,7 @@ public record LoginRequest(
         @NotBlank
         String email,
 
-        @Length(min=10)
+        @Length(min=8)
         @NotBlank
         String password
 ) {

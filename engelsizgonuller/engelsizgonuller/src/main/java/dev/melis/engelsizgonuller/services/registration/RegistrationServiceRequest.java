@@ -1,6 +1,6 @@
 package dev.melis.engelsizgonuller.services.registration;
 
-import dev.melis.engelsizgonuller.services.model.UserType;
+import dev.melis.engelsizgonuller.services.model.user.UserType;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import org.hibernate.validator.constraints.Length;

@@ -1,6 +1,6 @@
 package dev.melis.engelsizgonuller.controller.register;
 
-import dev.melis.engelsizgonuller.business.resulthandler.BusinessResultHandler;
+import dev.melis.engelsizgonuller.support.resulthandler.BusinessResultHandler;
 import dev.melis.engelsizgonuller.services.registration.RegistrationService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

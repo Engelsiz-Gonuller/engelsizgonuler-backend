@@ -1,9 +1,10 @@
-package dev.melis.engelsizgonuller.business.jwt;
+package dev.melis.engelsizgonuller.support.jwt;
 
+import dev.melis.engelsizgonuller.config.UserSession;
 import dev.melis.engelsizgonuller.services.jwt.JwtService;
-import dev.melis.engelsizgonuller.services.model.User;
-import dev.melis.engelsizgonuller.services.model.UserRole;
-import dev.melis.engelsizgonuller.services.user.UserService;
+import dev.melis.engelsizgonuller.services.model.user.User;
+import dev.melis.engelsizgonuller.services.model.user.UserRole;
+
 import dev.melis.engelsizgonuller.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -22,10 +24,10 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UserService userService;
+    private final UserDetailsService userService;
     private final UserRepository userRepository;
 
-    public JwtAuthenticationFilter(JwtService jwtService,UserService userService, UserRepository userRepository) {
+    public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService userService, UserRepository userRepository) {
         this.jwtService = jwtService;
         this.userService = userService;
         this.userRepository = userRepository;
@@ -57,6 +59,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(autToken);
             }
         }
+        User user = userRepository.findByUserEmail(userEmail).get();
+        var session = new UserSession(user.getUserId(),userEmail,userRole,user);
+        request.setAttribute("SESSION",session);
         filterChain.doFilter(request,response);
     }
 }

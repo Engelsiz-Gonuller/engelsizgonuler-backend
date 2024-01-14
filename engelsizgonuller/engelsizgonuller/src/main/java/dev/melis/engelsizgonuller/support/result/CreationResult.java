@@ -1,4 +1,4 @@
-package dev.melis.engelsizgonuller.business.result;
+package dev.melis.engelsizgonuller.support.result;
 
 public class CreationResult {
     private OperationResult  result;

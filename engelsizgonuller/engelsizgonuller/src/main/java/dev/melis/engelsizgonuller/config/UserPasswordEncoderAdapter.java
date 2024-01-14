@@ -10,7 +10,7 @@ public class UserPasswordEncoderAdapter implements UserPasswordEncoder {
 
     private final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
     @Override
-    public String encodePassword(String password) {
+    public String encode(String password) {
         return passwordEncoder.encode(password);
     }
 
@@ -20,7 +20,7 @@ public class UserPasswordEncoderAdapter implements UserPasswordEncoder {
     }
 
     @Override
-    public boolean matces(String password, String passwordHash) {
+    public boolean matches(String password, String passwordHash) {
         return passwordEncoder.matches(password,passwordHash);
     }
 }
