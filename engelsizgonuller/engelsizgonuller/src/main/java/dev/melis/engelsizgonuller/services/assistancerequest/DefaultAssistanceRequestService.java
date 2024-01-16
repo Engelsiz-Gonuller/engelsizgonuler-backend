@@ -1,17 +1,19 @@
 package dev.melis.engelsizgonuller.services.assistancerequest;
 
+
+import dev.melis.engelsizgonuller.services.model.user.UserType;
 import dev.melis.engelsizgonuller.support.result.CreationResult;
 import dev.melis.engelsizgonuller.repository.AssistanceRequestRepository;
 import dev.melis.engelsizgonuller.services.model.helpassistance.AssistanceRequests;
 import dev.melis.engelsizgonuller.services.model.helpassistance.RequestType;
 import dev.melis.engelsizgonuller.support.result.OperationFailureReason;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @Service
 public class DefaultAssistanceRequestService implements AssistanceRequestService {
@@ -57,14 +59,18 @@ public class DefaultAssistanceRequestService implements AssistanceRequestService
         }
         return false;
     }
-        @Override
-        public List<AssistanceRequests> listRequestWithCategory(Long id) {
-            List<AssistanceRequests> assistanceRequestsList= (List<AssistanceRequests>) assistanceRequestRepository.findAllByCategoryCategoryId(id);
-            if(assistanceRequestsList!=null && !assistanceRequestsList.isEmpty()){
-                return assistanceRequestsList;
+    @Override
+    public List<AssistanceRequests> listRequestWithCategory(Long id, UserType type) {
+        List<AssistanceRequests> assistanceRequestsList= assistanceRequestRepository.findAllByCategoryCategoryId(id);
+        if(assistanceRequestsList!=null && !assistanceRequestsList.isEmpty()){
+            if (type.equals(UserType.VOLUNTEER)){
+                return assistanceRequestsList.stream().filter(requests -> requests.getRequestType().equals(RequestType.DISABLED_REQUEST)).toList();
+            }else{
+                return assistanceRequestsList.stream().filter(requests -> requests.getRequestType().equals(RequestType.VOLUNTEER_HELP)).toList();
             }
-            return new ArrayList<>();
         }
+        return new ArrayList<>();
+    }
 
     @Override
     public List<AssistanceRequests> listRequestWithRequestType(RequestType requestType) {
@@ -79,7 +85,7 @@ public class DefaultAssistanceRequestService implements AssistanceRequestService
     public List<AssistanceRequests> listAll() {
         List<AssistanceRequests> assistanceRequestsList= assistanceRequestRepository.findAll();
         if(assistanceRequestsList!=null && !assistanceRequestsList.isEmpty()){
-         return assistanceRequestsList;
+            return assistanceRequestsList;
         }
         return new ArrayList<>();
     }

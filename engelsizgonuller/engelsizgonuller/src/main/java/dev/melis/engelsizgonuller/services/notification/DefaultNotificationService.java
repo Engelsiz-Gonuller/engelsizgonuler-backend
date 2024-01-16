@@ -2,10 +2,13 @@ package dev.melis.engelsizgonuller.services.notification;
 
 import dev.melis.engelsizgonuller.repository.NotificationRepository;
 import dev.melis.engelsizgonuller.services.model.notification.Notification;
+import dev.melis.engelsizgonuller.services.model.user.User;
 import dev.melis.engelsizgonuller.support.result.CreationResult;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -27,6 +30,12 @@ public class DefaultNotificationService implements NotificationService {
             notificationRepository.save(notification);
             return CreationResult.success();
 
+    }
+    @Override
+    public List<Notification> getAllNotification(Long id) {
+        User user=new User();
+        user.setUserId(id);
+        return notificationRepository.findAllByUser(user);
     }
 
 }

@@ -8,7 +8,6 @@ import dev.melis.engelsizgonuller.services.model.user.User;
 import java.time.LocalDate;
 
 public record AssistanceRequest(
-         long userId,
          RequestType requestType,
          long categoryId,
          String requestHeader,
@@ -16,7 +15,7 @@ public record AssistanceRequest(
          LocalDate requestDeadline,
          boolean isFulFilled
 ) {
-    AssistanceRequestServiceRequest toServiceRequest(){
+    AssistanceRequestServiceRequest toServiceRequest(long userId){
         User user=new User();
         user.setUserId(userId);
         Category category=new Category();

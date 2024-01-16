@@ -21,8 +21,8 @@ public class AssistanceRequestController {
         this.assistanceRequestService = assistanceRequestService;
     }
     @PostMapping
-    public ResponseEntity<?> createAssistanceRequest(@RequestBody AssistanceRequest assistanceRequest){
-        var result=assistanceRequestService.createAssistanceRequest(assistanceRequest.toServiceRequest());
+    public ResponseEntity<?> createAssistanceRequest(UserSession session, @RequestBody AssistanceRequest assistanceRequest){
+        var result=assistanceRequestService.createAssistanceRequest(assistanceRequest.toServiceRequest(session.id()));
         if(result.isSuccess()){
             return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -39,8 +39,8 @@ public class AssistanceRequestController {
     }
 
     @GetMapping("/categories/{id}")
-    public ResponseEntity<?> listAssistanceRequestWithCategory(@PathVariable Long id){
-        List<AssistanceRequests> assistanceRequestsList= assistanceRequestService.listRequestWithCategory(id);
+    public ResponseEntity<?> listAssistanceRequestWithCategory(UserSession session,@PathVariable Long id){
+        List<AssistanceRequests> assistanceRequestsList= assistanceRequestService.listRequestWithCategory(id,session.user().getUserType());
         if(assistanceRequestsList.isEmpty()){
             return new ResponseEntity<>("No assistance requests found for the specified category", HttpStatus.NOT_FOUND);
         }
@@ -50,7 +50,7 @@ public class AssistanceRequestController {
     public ResponseEntity<?> listAssistanceWithRequestType(@RequestParam String requestType){
         List<AssistanceRequests> assistanceRequestsList=assistanceRequestService.listRequestWithRequestType(RequestType.valueOf(requestType));
         if(assistanceRequestsList.isEmpty()){
-           return new ResponseEntity<>("No assistance requests found for the specified request type", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No assistance requests found for the specified request type", HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(assistanceRequestsList,HttpStatus.OK);
     }
