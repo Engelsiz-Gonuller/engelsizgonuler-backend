@@ -38,8 +38,9 @@ public class DefaultRegistrationService implements RegistrationService {
         user.setUserPassword(hashPassword);
         if(request.getUserType()== UserType.VOLUNTEER){
             user.setUserType(UserType.VOLUNTEER);
+        }else{
+            user.setUserType(UserType.DISABLED_INDIVIDUAL);
         }
-        user.setUserType(UserType.DISABLED_INDIVIDUAL);
         user.setDateOfRegistration(LocalDate.now());
         user.setRole(UserRole.USER);
         userRepository.save(user);

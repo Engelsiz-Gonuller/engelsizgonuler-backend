@@ -13,6 +13,7 @@ public class UserProfilePayload {
     String surname;
     String job;
     String about;
+    String email;
     String birthDate;
     LocalDate registerDate;
     UserType userType;
@@ -21,9 +22,10 @@ public class UserProfilePayload {
         name=user.getName();
         surname=user.getUserSurname();
         job= user.getUserJob();
+        email = user.getUsername();
         about= user.getAboutUser();
-        int age=LocalDate.now().getYear()- user.getBirthday().getYear();
-        birthDate=user.getBirthday().toString()+ " ( "+ age+" ) ";
+        int age=LocalDate.now().getYear()- (user.getBirthday() != null ? user.getBirthday().getYear() : 0);
+        birthDate=(user.getBirthday() != null ? user.getBirthday().toString() : "0") +  " ( " +  age+" ) ";
         registerDate=user.getDateOfRegistration();
         userType=user.getUserType();
     }

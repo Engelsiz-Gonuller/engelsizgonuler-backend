@@ -44,6 +44,7 @@ public class ApplicationConfig implements WebMvcConfigurer {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers){
         resolvers.add(new SessionArgumentResolver());
     }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry
@@ -52,4 +53,5 @@ public class ApplicationConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:5554","http://localhost:5555")
                 .allowCredentials(true);
     }
+
 }
